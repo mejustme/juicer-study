@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+</head>
+<body>
+<script type="text/template" id="j-template">
+    hello %{name|toText, a, b}
+    {@include "#j-subModule", subData}
+    {@include subModuleTpl, subData}
+
+</script>
+<script type="text/template" id="j-subModule">
+  a: %{a}
+  b: %{b}
+  c: %{c}
+</script>
+<div id="j-content">
+
+</div>
+<script type="text/javascript" src="./node_modules/juicer/build/juicer-min.js"></script>
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded',function () {
+        juicer.set({
+            'tag::operationOpen': '{@',
+            'tag::operationClose': '}',
+            'tag::interpolateOpen': '%{',
+            'tag::interpolateClose': '}',
+            'tag::noneencodeOpen': '%%{',
+            'tag::noneencodeClose': '}',
+            'tag::commentOpen': '{#',
+            'tag::commentClose': '}'
+        });
+        var tpl = document.getElementById('j-template').innerHTML;
+        juicer.register('toText', function (name, a, b) {
+            return name + a + b;
+        });
+        var compiledTpl = juicer(tpl);
+        document.getElementById("j-content").innerHTML =  compiledTpl.render({
+            name: 'cqh',
+            a: 1,
+            b: 2,
+            c: 4,
+            subModuleTpl: `
+            <br/>
+            a: hello %{a}`,
+            subData: {
+                a: 2,
+                b: 3
+            }
+        });
+
+    })
+</script>
+</body>
+</html>

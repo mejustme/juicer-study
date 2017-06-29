@@ -1,0 +1,20 @@
+{
+  "name": "juicer-study",
+  "homepage": "https://github.com/mejustme/juicer-study",
+  "authors": [
+    "陈钦辉 <hzchenqinhui@corp.netease.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "juicer": "^0.4.0"
+  }
+}
